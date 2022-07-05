@@ -1,0 +1,48 @@
+name: Bug report
+description: File a bug report
+title: "[BUG] "
+labels:
+  - kind/bug
+  - meta/needs triage
+  - priority/medium
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # Filing a report
+
+        Thank you for participating in this project and reporting a bug.
+
+        Please **fill out all the fields and checkboxes of this form** to make it easier for maintainers to understand the problem and to solve it. The maintainers and moderators are volunteers that need you to fill this template with accurate informations in order to help you in the best and quickest way. We will have to label your request with `meta/no template - no support` if your request is sloppy and provides no way to help you correctly.
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: On which version (image tag) did you encounter this bug?
+      placeholder: v0.1.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: descriptions
+    attributes:
+      label: Describe Your Issue
+      render: Markdown
+
+  - type: textarea
+    id: relevant-log-output
+    attributes:
+      label: Relevant log output
+      description: Show us relevant log output here. You can enable debug output by setting the environment variable `LOG_LEVEL` to `debug` or `trace`.
+      render: bash
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Terms
+      options:
+        - label: I have read the [README](https://github.com/docker-mailserver/docker-mailserver/blob/master/README.md) and the [documentation](https://docker-mailserver.github.io/docker-mailserver/edge/) and I searched the [issue tracker](https://github.com/docker-mailserver/docker-mailserver/issues?q=is%3Aissue) but could not find a solution
+          required: true
+

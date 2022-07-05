@@ -1,0 +1,8 @@
+shell=bash
+enable=all
+color=auto
+severity=style
+disable=SC2312,SC2154
+external-sources=true
+check-sourced=true
+wiki-link-count=5
