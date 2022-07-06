@@ -1,17 +1,53 @@
 # `k8s-dns`
 
-Easy yet powerful BIND9 DNS server for containers running in Kubernetes. Built with K8s-support in mind.
+Easy yet powerful BIND9 DNS server for containers. Built with K8s-support in mind.
+
+This project aims to supply the user with a dead-simple container that is highly customizable. We believe that users can easily write BIND9 configuration files themselves - therefore, we do not provide environment variables that will be parsed into configuration files.
 
 ## Configuration
 
-### User-Supplied
+### User-Supplied Configuration
 
-Your configuration should be mounted to `/etc/bind/namd.conf`. The entrypoint script will execute the `named` service and provide the aforementioned file as the configuration file. As a consequence, you can configure everything yourself. A default configuration can be found under [`configuration/namd.conf`](configuration/named.conf).
+Your base configuration should be mounted to `/etc/bind/namd.conf`. The entrypoint script will execute the `named` service and provide the aforementioned file as the configuration file. As a consequence, you can configure everything yourself. A default configuration can be found under [`configuration/namd.conf`](configuration/named.conf).
 
-### More
+### Custom Script
 
-If you want to run a custom script before the DNS server is started, you can mount a script to `/user-patches.sh`. This script will be `source`d (!) before the DNS server is started, if it is present. If you provide a function called `user-patches-main`, the function is called. This way, you can even adjust environment variables configured in the entrypoint script.
+If you want to run a custom script before the DNS server is started, you can mount a script to `/user-patches.sh`. This script will be `source`d before the DNS server is started, if it is present. If you provide a function called `user-patches-main`, the function is called. This way, you can even adjust environment variables configured in the entrypoint script.
 
-## Container Settings
+## Container Settings / Metrics
 
 The containers listens on port `8053`, for both UDP and TCP. You should be able to run this container with a read-only root filesystem. The default user is `bind` (`101:101`). Therefore, you can run this container with a non-root user. If you need to change the time zone though, you will need to run as root.
+
+| Metric       | Value                          |
+| :----------: | :----------------------------: |
+| open port(s) | `8053` (TCP & UDP)             |
+| default user | `bind` (UID `101` & GID `101`) |
+
+## Examples of Use
+
+### In Conjunction with CoreDNS
+
+In K8s, [CoreDNS](https://coredns.io/) is a de-facto standard for cluster-wide DNS. CoreDNS is easy to configure for most use cases. However, if you need a more complex recursive resolver that may be able to use DNSSEC, you would need to compile CoreDNS with the unbound plugin yourself. With this container though, you can resolve queries recursively and with DNSSEC. Here is a small example of a `Corefile` that forwards queries, that may need recursive resolving, to this container:
+
+``` CONF
+dnswl.org spamhaus.org {
+    forward . dns://<K8S-DNS-SERVICE-CLUSTER-IP-ADDRESS>:8053 {
+      prefer_udp
+    }
+}
+
+.:53 {
+    kubernetes cluster.local in-addr.arpa ip6.arpa {
+      pods verified
+      fallthrough in-addr.arpa ip6.arpa
+      ttl 30
+    }
+
+    forward . tls://1.1.1.1 tls://1.0.0.1 {
+      tls_servername cloudflare-dns.com
+      health_check 30s
+    }
+}
+```
+
+This is especially useful because CoreDNS can handle cluster-specific traffic very well. You would not want to handle cluster-specific DNS traffic with this container alone.
