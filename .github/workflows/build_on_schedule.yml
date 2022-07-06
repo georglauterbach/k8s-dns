@@ -1,8 +1,9 @@
-name: "Build Edge on Schedule"
+---
+name: Build Edge on Schedule
 
-on:
+on:  # yamllint disable-line rule:truthy
   schedule:
-    - cron: "0 0 * * 5"
+    - cron: 0 0 * * 5
 
 permissions:
   contents: read

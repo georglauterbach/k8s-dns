@@ -1,4 +1,5 @@
-name: 'Build, Test & Deploy'
+---
+name: Build, Test & Deploy
 
 on: # yamllint disable-line rule:truthy
   workflow_dispatch:

@@ -1,6 +1,7 @@
+---
 name: Bug report
 description: File a bug report
-title: "[BUG] "
+title: '[BUG] '
 labels:
   - kind/bug
   - meta/needs triage
@@ -14,7 +15,13 @@ body:
 
         Thank you for participating in this project and reporting a bug.
 
-        Please **fill out all the fields and checkboxes of this form** to make it easier for maintainers to understand the problem and to solve it. The maintainers and moderators are volunteers that need you to fill this template with accurate informations in order to help you in the best and quickest way. We will have to label your request with `meta/no template - no support` if your request is sloppy and provides no way to help you correctly.
+        Please **fill out all the fields and checkboxes of this form** to
+        make it easier for maintainers to understand the problem and to
+        solve it. The maintainers and moderators are volunteers that need
+        you to fill this template with accurate informations in order to
+        help you in the best and quickest way. We will have to label your
+        request with `meta/no template - no support` if your request is
+        sloppy and provides no way to help you correctly.
 
   - type: input
     id: version
@@ -35,7 +42,9 @@ body:
     id: relevant-log-output
     attributes:
       label: Relevant log output
-      description: Show us relevant log output here. You can enable debug output by setting the environment variable `LOG_LEVEL` to `debug` or `trace`.
+      description: >
+        Show us relevant log output here. You can enable debug output by
+        setting the environment variable `LOG_LEVEL` to `debug` or `trace`.
       render: bash
 
   - type: checkboxes
@@ -43,6 +52,11 @@ body:
     attributes:
       label: Terms
       options:
-        - label: I have read the [README](https://github.com/docker-mailserver/docker-mailserver/blob/master/README.md) and the [documentation](https://docker-mailserver.github.io/docker-mailserver/edge/) and I searched the [issue tracker](https://github.com/docker-mailserver/docker-mailserver/issues?q=is%3Aissue) but could not find a solution
+        - label: >
+            I have read the
+            [README](https://github.com/georglauterbach/k8s-dns/blob/master/README.md)
+            and I searched the
+            [issue tracker](https://github.com/docker-mailserver/docker-mailserver/issues?q=is%3Aissue)
+            but could not find a solution
           required: true
 

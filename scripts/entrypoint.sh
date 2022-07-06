@@ -12,13 +12,13 @@ NAMED_OPTIONS+=('/etc/bind/named.conf')
 
 if [[ -f /user-patches.sh ]]
 then
-	# shellcheck source=/dev/null
-	source /user-patches.sh
-	
-	if [[ $(type -t user-patches-main) == 'function' ]]
-	then
-		user-patches-main
-	fi
+  # shellcheck source=/dev/null
+  source /user-patches.sh
+  
+  if [[ $(type -t user-patches-main) == 'function' ]]
+  then
+    user-patches-main
+  fi
 fi
 
 named-checkconf /etc/bind/named.conf
