@@ -16,8 +16,7 @@ default:
 		--build-arg BUILD_VCS_VERSION=$(BUILD_VCS_VERSION) \
 
 run:
-	@- docker run                         \
-		--rm -it                          \
-		-p 8053:8053/udp -p 8053:8053/tcp \
-		-v $(shell pwd)/configuration/named.conf:/etc/bind/named.conf \
-		$(BUILD_NAME):$(TAG)
+	@- docker run --rm -it                        \
+		-p 8053:8053/udp -p 8053:8053/tcp         \
+		-v $(shell pwd)/configuration/:/etc/bind/ \
+		$(IMAGE_NAME):$(IMAGE_TAG)
