@@ -4,6 +4,20 @@ Easy yet powerful BIND9 DNS server for containers. Built with K8s-support in min
 
 This project aims to supply the user with a dead-simple container that is highly customizable. We believe that users can easily write BIND9 configuration files themselves - therefore, we do not provide environment variables that will be parsed into configuration files.
 
+## Usage
+
+[CI/CD](https://github.com/georglauterbach/k8s-dns/actions) will automatically build and push new images to container registries. Currently, the following registries are supported:
+
+1. [DockerHub](https://hub.docker.com/r/andevour/k8s-dns)
+2. [GitHub Container Registry (GHCR)](https://github.com/georglauterbach/k8s-dns/pkgs/container/k8s-dns)
+
+All workflows are using the tagging convention listed below. It is subsequently applied to all images.
+
+| Event                        | Image Tags                    |
+|------------------------------|-------------------------------|
+| `push` on `main`             | `edge`                        |
+| `push` a tag (e.g. `v2.4.3`) | `2.4.3`, `2.4`, `2`, `latest` |
+
 ## Configuration
 
 ### User-Supplied Configuration
