@@ -1,23 +1,22 @@
 SHELL = /bin/bash
 
-BUILD_NAME   ?= k8s-dns
-TAG          ?= testing
-BUILD_TZ     ?= Europe/Berlin
-BUILD_VCS_REF = $(shell git rev-parse --short HEAD)
-BUILD_VCS_VER = $(shell git describe --tags --contains --always)
+IMAGE_NAME ?= k8s-dns
+IMAGE_TAG  ?= testing
+
+BUILD_TIMEZONE       ?= Europe/Berlin
+BUILD_VCS_REFERENCE   = $(shell git rev-parse --short HEAD)
+BUILD_VCS_VERSION     = $(shell git describe --tags --contains --always)
 
 default:
 	@ docker build .                               \
-		-t $(BUILD_NAME):$(TAG)              \
-		--build-arg BUILD_NAME=$(BUILD_NAME)       \
-		--build-arg TAG=$(TAG)         \
-		--build-arg BUILD_TZ=$(BUILD_TZ)           \
-		--build-arg BUILD_VCS_REF=$(BUILD_VCS_REF) \
-		--build-arg BUILD_VCS_VER=$(BUILD_VCS_VER) \
+		-t $(IMAGE_NAME):$(IMAGE_TAG)              \
+		--build-arg IMAGE_NAME=$(IMAGE_NAME)       \
+		--build-arg BUILD_TIMEZONE=$(BUILD_TIMEZONE)           \
+		--build-arg BUILD_VCS_REFERENCE=$(BUILD_VCS_REFERENCE) \
+		--build-arg BUILD_VCS_VERSION=$(BUILD_VCS_VERSION) \
 
 run:
-	@- docker run                         \
-		--rm -it                          \
-		-p 8053:8053/udp -p 8053:8053/tcp \
-		-v $(shell pwd)/configuration/named.conf:/etc/bind/named.conf \
-		$(BUILD_NAME):$(TAG)
+	@- docker run --rm -it                        \
+		-p 8053:8053/udp -p 8053:8053/tcp         \
+		-v $(shell pwd)/configuration/:/etc/bind/ \
+		$(IMAGE_NAME):$(IMAGE_TAG)

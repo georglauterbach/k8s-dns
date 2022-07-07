@@ -55,10 +55,10 @@ jobs:
           context: .
           file: ./Dockerfile
           build-args: |
-            BUILD_NAME=${{ github.repository }}
-            BUILD_VCS_REF=${{ github.sha }}
-            BUILD_VCS_VER=${{ github.ref }}
-            BUILD_TZ=Europe/Berlin
+            IMAGE_NAME=${{ github.repository }}
+            BUILD_VCS_REFERENCE=${{ github.sha }}
+            BUILD_VCS_VERSION=${{ github.ref }}
+            BUILD_TIMEZONE=Europe/Berlin
           platforms: linux/amd64,linux/arm/v7,linux/arm64
           push: true
           tags: ${{ steps.prep.outputs.tags }}
