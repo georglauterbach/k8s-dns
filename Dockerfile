@@ -1,11 +1,10 @@
 FROM docker.io/debian:11-slim
 
-ARG BUILD_NAME BUILD_VCS_VER BUILD_VCS_REF BUILD_TZ
-ARG DEBIAN_FRONTEND=noninteractive
+ARG IMAGE_NAME BUILD_VCS_VERSION BUILD_VCS_REFERENCE BUILD_TIMEZONE
 
-LABEL org.opencontainers.image.version=${BUILD_VCS_VER}
-LABEL org.opencontainers.image.revision=${BUILDVCS_REF}
-LABEL org.opencontainers.image.title=${BUILD_NAME}
+LABEL org.opencontainers.image.version=${BUILD_VCS_VERSION}
+LABEL org.opencontainers.image.revision=${BUILD_VCS_REFERENCE}
+LABEL org.opencontainers.image.title=${IMAGE_NAME}
 LABEL org.opencontainers.image.vendor="Georg Lauterbach"
 LABEL org.opencontainers.image.authors="Georg Lauterbach"
 LABEL org.opencontainers.image.licenses="GPL-3.0"
@@ -33,8 +32,8 @@ RUN \
 	mkdir -p /var/log/named/ /etc/bind/ \
 	&& chown bind:bind /var/log/named \
 	&& chmod 0755 /var/log/named \
-	&& ln -fs "/usr/share/zoneinfo/${BUILD_TZ}" /etc/localtime \
 	&& dpkg-reconfigure -f noninteractive tzdata
+	&& ln -fs "/usr/share/zoneinfo/${BUILD_TIMEZONE}" /etc/localtime \
 
 WORKDIR /
 COPY ./scripts/entrypoint.sh /
