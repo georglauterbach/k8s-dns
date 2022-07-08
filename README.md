@@ -22,11 +22,23 @@ All workflows are using the tagging convention listed below. It is subsequently 
 
 ### User-Supplied Configuration
 
-Your base configuration should be mounted to `/etc/bind/namd.conf`. The entrypoint script will execute the `named` service and provide the aforementioned file as the configuration file. As a consequence, you can configure everything yourself. A default configuration can be found under [`configuration/namd.conf`](configuration/named.conf).
+Your base configuration can be be mounted to `${NAMED_MAIN_CONFIGURATION_FILE}` (see [environment variable section](#named_main_configuration_file)). The entrypoint script will execute the `named` service and provide the aforementioned file as the configuration file. As a consequence, you can configure everything yourself. A default configuration can be found under [`configuration/namd.conf`](configuration/named.conf).
 
 ### Custom Script
 
-If you want to run a custom script before the DNS server is started, you can mount a script to `/user-patches.sh`. This script will be `source`d before the DNS server is started, if it is present. If you provide a function called `user-patches-main`, the function is called. This way, you can even adjust environment variables configured in the entrypoint script.
+If you want to run a custom script before the DNS server is started, you can mount a script to `${USER_PATCHES_FILE}` (see [environment variable section](#user_patches_file)). This script will be `source`d before the DNS server is started, if it is present. If you provide a function called `user-patches-main`, the function is called. This way, you can even adjust environment variables configured in the entrypoint script. Have a look at the [entrypoint script](./scripts/entrypoint.sh) to see which variables are declared and what you can adjust.
+
+### Environment Variables
+
+The following list of environment variables can be used to adjust the container's behavior.
+
+#### `NAMED_MAIN_CONFIGURATION_FILE`
+
+This sets the main configuration file that the `named` service is provided with during startup. The default is `/etc/bind/named.conf`.
+
+#### `USER_PATCHES_FILE`
+
+If you want to provide a custom script that is run right before the `named` service is started, you can change the location of this script with this variable. The default is `/user-patches.sh`.
 
 ## Container Settings / Metrics
 
