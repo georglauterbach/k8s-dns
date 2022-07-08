@@ -1,9 +1,7 @@
 FROM docker.io/ubuntu:22.04
 
 ARG IMAGE_NAME BUILD_VCS_VERSION BUILD_VCS_REFERENCE BUILD_TIMEZONE
-ENV USER=bind
-ENV	GROUP=bind
-ENV DEBIAN_FRONTEND=noninteractive
+ENV USER=bind GROUP=bind DEBIAN_FRONTEND=noninteractive
 
 LABEL org.opencontainers.image.version=${BUILD_VCS_VERSION}
 LABEL org.opencontainers.image.revision=${BUILD_VCS_REFERENCE}
@@ -29,7 +27,7 @@ RUN apt-get -qq update \
 	&& rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /var/log/named/ /etc/bind/ \
-	&& chown bind:bind /var/log/named \
+	&& chown ${USER}:${GROUP} /var/log/named \
 	&& chmod 0755 /var/log/named \
 	&& ln -fs "/usr/share/zoneinfo/${BUILD_TIMEZONE}" /etc/localtime \
 	&& dpkg-reconfigure -f noninteractive tzdata 2>&1
@@ -37,9 +35,7 @@ RUN mkdir -p /var/log/named/ /etc/bind/ \
 COPY ./scripts/entrypoint.sh /
 
 USER bind
-
-EXPOSE 8053/tcp
-EXPOSE 8053/udp
+EXPOSE 8053/tcp 8053/udp
 
 ENTRYPOINT ["/bin/bash"]
 CMD ["/entrypoint.sh"]
