@@ -7,7 +7,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Added
 
 - usage information
-- option to set config file and user patches with environment variables
+- option to set config and user patches file with environment variables
 
 ### Changed
 
