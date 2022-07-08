@@ -22,7 +22,7 @@ NAMED_OPTIONS+=('-u')
 NAMED_OPTIONS+=('bind')
 NAMED_OPTIONS+=('-c')
 
-NAMED_MAIN_CONFIGURATION_FILE=${NAMED_MAIN_CONFIGURATION_FILE:-/etc/bind/namd.conf}
+NAMED_MAIN_CONFIGURATION_FILE=${NAMED_MAIN_CONFIGURATION_FILE:-/etc/bind/named.conf}
 USER_PATCHES_FILE=${USER_PATCHES_FILE:-/user-patches.sh}
 
 # -----------------------------------------------
