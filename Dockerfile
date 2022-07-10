@@ -34,7 +34,7 @@ RUN mkdir -p /var/log/named/ /etc/bind/ \
 
 COPY ./scripts/entrypoint.sh /
 
-USER bind
+USER ${USER}
 EXPOSE 8053/tcp 8053/udp
 
 ENTRYPOINT ["/bin/bash"]
