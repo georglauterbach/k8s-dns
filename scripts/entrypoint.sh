@@ -20,7 +20,6 @@ NAMED_OPTIONS+=('-4')
 NAMED_OPTIONS+=('-f')
 NAMED_OPTIONS+=('-u')
 NAMED_OPTIONS+=('bind')
-NAMED_OPTIONS+=('-c')
 
 NAMED_MAIN_CONFIGURATION_FILE=${NAMED_MAIN_CONFIGURATION_FILE:-/etc/bind/named.conf}
 USER_PATCHES_FILE=${USER_PATCHES_FILE:-/user-patches.sh}
@@ -45,6 +44,8 @@ fi
 # -----------------------------------------------
 
 named-checkconf "${NAMED_MAIN_CONFIGURATION_FILE}"
+
+NAMED_OPTIONS+=('-c')
 NAMED_OPTIONS+=("${NAMED_MAIN_CONFIGURATION_FILE}")
 
 exec /usr/sbin/named "${NAMED_OPTIONS[@]}"
