@@ -18,60 +18,14 @@ permissions:
   packages: write
 
 jobs:
-  build-multiarch-and-publish:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3.1.0
-        with:
-          submodules: recursive
+  build-image:
+    name: Build Image
+    uses: georglauterbach/k8s-dns/.github/workflows/generic_build.yml@main
 
-      - name: Prepare tags
-        id: prep
-        uses: docker/metadata-action@v4.1.1
-        with:
-          images: |
-            ${{ secrets.DOCKER_REPOSITORY }}
-            ${{ secrets.GHCR_REPOSITORY }}
-          tags: |
-            type=edge,branch=main
-            type=semver,pattern={{major}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}.{{minor}}.{{patch}}
-          flavor: |
-            latest=auto
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2.1.0
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2.2.1
-        id: buildx
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v2.1.0
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v2.1.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build images locally
-        uses: docker/build-push-action@v3.2.0
-        with:
-          builder: ${{ steps.buildx.outputs.name }}
-          context: .
-          file: ./Dockerfile
-          build-args: |
-            IMAGE_NAME=${{ github.repository }}
-            BUILD_VCS_REFERENCE=${{ github.sha }}
-            BUILD_VCS_VERSION=${{ github.ref }}
-            BUILD_TIMEZONE=Europe/Berlin
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ steps.prep.outputs.tags }}
+  publish-images:
+    name: Publish Image
+    needs: [build-image]
+    uses: georglauterbach/k8s-dns/.github/workflows/generic_publish.yml@main
+    with:
+      cache-key: ${{ needs.build-image.outputs.build-cache-key }}
+    secrets: inherit

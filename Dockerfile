@@ -1,7 +1,13 @@
-FROM docker.io/ubuntu:22.04
+# syntax=docker.io/docker/dockerfile:1
 
-ARG IMAGE_NAME BUILD_VCS_VERSION BUILD_VCS_REFERENCE BUILD_TIMEZONE
-ENV USER=bind GROUP=bind DEBIAN_FRONTEND=noninteractive
+FROM docker.io/alpine:3.16
+
+ARG IMAGE_NAME=k8s-dns
+ARG BUILD_VCS_VERSION=edge
+ARG BUILD_VCS_REFERENCE=unknown
+ARG BUILD_TIMEZONE=Europe/Berlin
+ENV USER=named
+ENV GROUP=named
 
 LABEL org.opencontainers.image.version=${BUILD_VCS_VERSION}
 LABEL org.opencontainers.image.revision=${BUILD_VCS_REFERENCE}
@@ -14,23 +20,15 @@ LABEL org.opencontainers.image.url="https://github.com/georglauterbach/k8s-dns"
 LABEL org.opencontainers.image.documentation="https://github.com/georglauterbach/k8s-dns/blob/main/README.md"
 LABEL org.opencontainers.image.source="https://github.com/georglauterbach/k8s-dns"
 
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+SHELL ["/bin/ash", "-e", "-u", "-c"]
 WORKDIR /
 
-RUN apt-get -qq update \
-	&& apt-get -qq dist-upgrade \
-	&& apt-get -qq install --no-install-recommends --no-install-suggests bind9 tzdata \
-	&& apt-get -qq purge --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
-	&& apt-get -qq autoremove \
-	&& apt-get -qq autoclean \
-	&& apt-get -qq clean \
-	&& rm -rf /var/lib/apt/lists/*
-
-RUN mkdir -p /var/log/named/ /etc/bind/ \
-	&& chown ${USER}:${GROUP} /var/log/named \
-	&& chmod 0755 /var/log/named \
-	&& ln -fs "/usr/share/zoneinfo/${BUILD_TIMEZONE}" /etc/localtime \
-	&& dpkg-reconfigure -f noninteractive tzdata 2>&1
+RUN <<"EOM"
+	apk add --no-cache bind bind-tools tzdata bash
+	mkdir -p /var/cache/named /etc/bind/
+	chown -R ${USER}:${GROUP} /var/cache/named
+	ln -fs "/usr/share/zoneinfo/${BUILD_TIMEZONE}" /etc/localtime
+EOM
 
 COPY ./scripts/entrypoint.sh /
 

@@ -1,6 +1,6 @@
 # `k8s-dns`
 
-Easy yet powerful BIND9 DNS server for containers. Built with K8s-support in mind.
+Easy yet powerful BIND9 DNS server for containers running on Alpine with Bash. Built with K8s-support in mind.
 
 This project aims to supply the user with a dead-simple container that is highly customizable. We believe that users can easily write BIND9 configuration files themselves - therefore, we do not provide environment variables that will be parsed into configuration files.
 
@@ -22,7 +22,7 @@ All workflows are using the tagging convention listed below. It is subsequently 
 
 ### User-Supplied Configuration
 
-Your base configuration can be be mounted to `${NAMED_MAIN_CONFIGURATION_FILE}` (see [environment variable section](#named_main_configuration_file)). The entrypoint script will execute the `named` service and provide the aforementioned file as the configuration file. As a consequence, you can configure everything yourself. A default configuration can be found under [`configuration/namd.conf`](configuration/named.conf).
+Your base configuration can be mounted to `${NAMED_MAIN_CONFIGURATION_FILE}` (see [environment variable section](#named_main_configuration_file)). The entrypoint script will execute the `named` service and provide the aforementioned file as the configuration file. As a consequence, you can configure everything yourself. A default configuration can be found under [`configuration/namd.conf`](configuration/named.conf).
 
 ### Custom Script
 
