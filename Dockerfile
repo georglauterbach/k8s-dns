@@ -30,7 +30,7 @@ RUN <<"EOM"
 	ln -fs "/usr/share/zoneinfo/${BUILD_TIMEZONE}" /etc/localtime
 EOM
 
-COPY ./scripts/entrypoint.sh /
+COPY ./VERSION ./scripts/entrypoint.sh /
 
 USER ${USER}
 EXPOSE 8053/tcp 8053/udp
