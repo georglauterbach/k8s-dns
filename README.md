@@ -44,10 +44,10 @@ If you want to provide a custom script that is run right before the `named` serv
 
 The containers listens on port `8053`, for both UDP and TCP. You should be able to run this container with a read-only root filesystem. The default user is `bind` (`101:101`). Therefore, you can run this container with a non-root user. If you need to change the time zone though, you will need to run as root.
 
-| Metric       | Value                          |
-| :----------: | :----------------------------: |
-| open port(s) | `8053` (TCP & UDP)             |
-| default user | `bind` (UID `101` & GID `101`) |
+| Metric       | Value                           |
+| :----------: | :-----------------------------: |
+| open port(s) | `8053` (TCP & UDP)              |
+| default user | `named` (UID `100` & GID `101`) |
 
 ## Examples of Use
 
