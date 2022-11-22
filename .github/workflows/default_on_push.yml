@@ -8,8 +8,8 @@ on: # yamllint disable-line rule:truthy
       - main
     paths:
       - Dockerfile
-      - scripts/
-      - configuration/
+      - scripts/**
+      - configuration/**
     tags:
       - '*.*.*'
 
