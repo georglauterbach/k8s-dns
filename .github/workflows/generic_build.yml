@@ -24,33 +24,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3.1.0
-        with:
-          submodules: recursive
 
-      # Can potentially be replaced by: `${{ hashFiles('target/**', 'Dockerfile', 'VERSION') }}`
-      # Must not be affected by file metadata changes and have a consistent sort order:
-      # https://docs.github.com/en/actions/learn-github-actions/expressions#hashfiles
-      # Keying by the relevant build context is more re-usable than a commit SHA.
       - name: Derive Docker image cache key from content
         id: derive-image-cache-key
         shell: bash
         run: |
-          ADDITIONAL_FILES=(
-            'Dockerfile'
-            'scripts/entrypoint.sh'
-          )
-
-          # Recursively collect file paths from `target/` and pipe a list of
-          # checksums to be sorted (by hash value) and finally generate a checksum
-          # of that list, using `awk` to only return the hash value (digest):
-          IMAGE_CHECKSUM=$(\
-            find ./configuration -type f -exec sha256sum "${ADDITIONAL_FILES[@]}" {} + \
-              | sort \
-              | sha256sum \
-              | awk '{ print $1 }' \
-          )
-
-          echo "digest=${IMAGE_CHECKSUM}" >>"${GITHUB_OUTPUT}"
+          CHECKSUM=${{ hashFiles('Dockerfile', 'scripts/**', 'configuration/**') }}
+          echo "digest=${CHECKSUM}" >>"${GITHUB_OUTPUT}"
 
       # Attempts to restore the build cache from a prior build run.
       # If the exact key is not restored, then upon a successful job run

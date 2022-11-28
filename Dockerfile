@@ -15,7 +15,7 @@ LABEL org.opencontainers.image.title ${IMAGE_NAME}
 LABEL org.opencontainers.image.vendor "Georg Lauterbach"
 LABEL org.opencontainers.image.authors "Georg Lauterbach"
 LABEL org.opencontainers.image.licenses "GPL-3.0"
-LABEL org.opencontainers.image.description "BIND9 DNS Server for containers running in Kubernetes"
+LABEL org.opencontainers.image.description "BIND9 DNS server running in a container"
 LABEL org.opencontainers.image.url "https://github.com/georglauterbach/k8s-dns"
 LABEL org.opencontainers.image.documentation "https://github.com/georglauterbach/k8s-dns/blob/main/README.md"
 LABEL org.opencontainers.image.source "https://github.com/georglauterbach/k8s-dns"
@@ -23,7 +23,7 @@ LABEL org.opencontainers.image.source "https://github.com/georglauterbach/k8s-dn
 SHELL ["/bin/ash", "-e", "-u", "-c"]
 WORKDIR /
 
-RUN <<"EOM"
+RUN <<EOM
 	apk add --no-cache bind bind-tools tzdata bash
 	mkdir -p /var/cache/named /etc/bind/
 	chown -R ${USER}:${GROUP} /var/cache/named
