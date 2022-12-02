@@ -11,9 +11,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Updated
 
 - Alpine bumped from 3.16 to 3.17
+- added port 53 to list of container ports
+
+### Added
+
+- `configuration/named.conf` is now the default configuration inside the container
 
 ## [0.2.1] - 2022-11-24
- 
+
 ### Added
 
 - a new file called `VERSION` used for checking the version
@@ -49,3 +54,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 [0.1.0]: https://github.com/georglauterbach/k8s-dns/releases/tag/v0.1.0
 [0.2.0]: https://github.com/georglauterbach/k8s-dns/releases/tag/v0.2.0
+[0.2.1]: https://github.com/georglauterbach/k8s-dns/releases/tag/v0.2.1

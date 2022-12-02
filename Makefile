@@ -10,9 +10,8 @@ BUILD_VCS_VERSION     = $(shell cat VERSION)
 
 .PHONY: ALWAYS_RUN
 
-default: ALWAYS_RUN build
-
-all: ALWAYS_RUN build run
+default: build
+all: build run
 
 build: ALWAYS_RUN
 	@ DOCKER_BUILDKIT=1 docker build                         \

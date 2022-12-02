@@ -22,7 +22,7 @@ All workflows are using the tagging convention listed below. It is subsequently 
 
 ### User-Supplied Configuration
 
-Your base configuration can be mounted to `${NAMED_MAIN_CONFIGURATION_FILE}` (see [environment variable section](#named_main_configuration_file)). The entrypoint script will execute the `named` service and provide the aforementioned file as the configuration file. As a consequence, you can configure everything yourself. A default configuration can be found under [`configuration/namd.conf`](configuration/named.conf).
+Your base configuration can be mounted to `${NAMED_MAIN_CONFIGURATION_FILE}` (see [environment variable section](#named_main_configuration_file)). The entrypoint script will execute the `named` service and provide the aforementioned file as the configuration file. As a consequence, you can configure everything yourself. A default configuration can be found under [`configuration/namd.conf`](configuration/named.conf) - this file is mounted to `${NAMED_MAIN_CONFIGURATION_FILE}` as a default.
 
 ### Custom Script
 
@@ -42,11 +42,11 @@ If you want to provide a custom script that is run right before the `named` serv
 
 ## Container Settings / Metrics
 
-The containers listens on port `8053`, for both UDP and TCP. You should be able to run this container with a read-only root filesystem. The default user is `bind` (`101:101`). Therefore, you can run this container with a non-root user. If you need to change the time zone though, you will need to run as root.
+The containers listens on port `8053` by default, for both UDP and TCP. You should be able to run this container with a read-only root filesystem. Therefore, you can run this container with a non-root user. If you need to change the time zone though, you will need to run as root.
 
 | Metric       | Value                           |
 | :----------: | :-----------------------------: |
-| open port(s) | `8053` (TCP & UDP)              |
+| open port(s) | `53` & `8053` (TCP & UDP)       |
 | default user | `named` (UID `100` & GID `101`) |
 
 ## Examples of Use

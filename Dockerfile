@@ -31,9 +31,10 @@ RUN <<EOM
 EOM
 
 COPY ./VERSION ./scripts/entrypoint.sh /
+COPY ./configuration/named.conf /etc/bind/named.conf
 
 USER ${USER}
-EXPOSE 8053/tcp 8053/udp
+EXPOSE 53/tcp 53/udp 8053/tcp 8053/udp
 
 ENTRYPOINT ["/bin/bash"]
 CMD ["/entrypoint.sh"]
