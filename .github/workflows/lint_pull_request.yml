@@ -21,7 +21,7 @@ jobs:
           submodules: true
 
       - name: Lint code base
-        uses: github/super-linter@v4.10.0
+        uses: github/super-linter@v4.10.1
         env:
           LOG_LEVEL: NOTICE
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
