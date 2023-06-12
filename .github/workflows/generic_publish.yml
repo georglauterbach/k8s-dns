@@ -22,7 +22,7 @@ jobs:
 
       - name: Prepare tags
         id: prep
-        uses: docker/metadata-action@v4.4.0
+        uses: docker/metadata-action@v4.5.0
         with:
           images: |
             ${{ secrets.GHCR_REPOSITORY }}
@@ -34,7 +34,7 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
 
       - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2.1.0
+        uses: docker/setup-qemu-action@v2.2.0
         with:
           platforms: arm64
 
