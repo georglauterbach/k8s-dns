@@ -1,6 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM docker.io/alpine:3.18
+FROM docker.io/alpine:3.19
 
 ARG IMAGE_NAME=k8s-dns
 ARG BUILD_VCS_VERSION=edge
