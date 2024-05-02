@@ -18,17 +18,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.1.4
         with:
-          submodules: true
+          submodules: false
+          # super-linter needs the full git history to get the
+          # list of files that changed across commits
+          fetch-depth: 0
 
       - name: Lint code base
-        uses: github/super-linter@v5.0.0
+        uses: super-linter/super-linter/slim@v6.3.0
         env:
           LOG_LEVEL: NOTICE
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SUPPRESS_POSSUM: true
           VALIDATE_ALL_CODEBASE: true
 
-          ERROR_ON_MISSING_EXEC_BIT: true
           VALIDATE_BASH: true
           VALIDATE_BASH_EXEC: true
           VALIDATE_EDITORCONFIG: true
