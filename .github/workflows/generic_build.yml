@@ -1,3 +1,4 @@
+---
 name: Build the Container Image
 
 on: # yamllint disable-line rule:truthy
