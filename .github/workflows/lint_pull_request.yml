@@ -18,7 +18,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4.1.3
         with:
-          submodules: true
+          submodules: false
+          # super-linter needs the full git history to get the
+          # list of files that changed across commits
+          fetch-depth: 0
 
       - name: Lint code base
         uses: super-linter/super-linter/slim@v6.3.0
