@@ -24,7 +24,7 @@ jobs:
       build-cache-key: ${{ steps.derive-image-cache-key.outputs.digest }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
 
       - name: Derive Docker image cache key from content
         id: derive-image-cache-key
