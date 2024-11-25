@@ -22,7 +22,7 @@ jobs:
 
       - name: Prepare tags
         id: prep
-        uses: docker/metadata-action@v5.5.1
+        uses: docker/metadata-action@v5.6.1
         with:
           images: |
             ${{ secrets.GHCR_REPOSITORY }}
