@@ -18,6 +18,4 @@ jobs:
     name: Publish Images
     needs: build-images
     uses: georglauterbach/k8s-dns/.github/workflows/generic_publish.yml@main
-    with:
-      cache-key: ${{ needs.build-images.outputs.build-cache-key }}
     secrets: inherit

@@ -3,14 +3,14 @@
 FROM docker.io/alpine:3.21
 
 ARG IMAGE_NAME=k8s-dns
-ARG BUILD_VCS_VERSION=edge
-ARG BUILD_VCS_REFERENCE=unknown
+ARG VCS_VERSION=edge
+ARG VSC_REVISION=unknown
 ARG BUILD_TIMEZONE=Europe/Berlin
 ENV USER=named
 ENV GROUP=named
 
-LABEL org.opencontainers.image.version ${BUILD_VCS_VERSION}
-LABEL org.opencontainers.image.revision ${BUILD_VCS_REFERENCE}
+LABEL org.opencontainers.image.version ${VCS_VERSION}
+LABEL org.opencontainers.image.revision ${VSC_REVISION}
 LABEL org.opencontainers.image.title ${IMAGE_NAME}
 LABEL org.opencontainers.image.vendor "Georg Lauterbach"
 LABEL org.opencontainers.image.authors "Georg Lauterbach"

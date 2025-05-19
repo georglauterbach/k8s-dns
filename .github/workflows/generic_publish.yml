@@ -3,10 +3,6 @@ name: Publish the DMS Container Image
 
 on: # yamllint disable-line rule:truthy
   workflow_call:
-    inputs:
-      cache-key:
-        required: true
-        type: string
 
 permissions:
   contents: read
@@ -18,11 +14,19 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.2
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Prepare tags
-        id: prep
-        uses: docker/metadata-action@v5.7.0
+        id: prep-tags
+        uses: docker/metadata-action@v5
         with:
           images: |
             ${{ secrets.GHCR_REPOSITORY }}
@@ -32,25 +36,6 @@ jobs:
             type=semver,pattern={{major}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}.{{minor}}.{{patch}}
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3.6.0
-        with:
-          platforms: arm64
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3.10.0
-
-      # Try get the cached build layers from a prior `generic_build.yml` job.
-      # NOTE: Until adopting `type=gha` scoped cache exporter (in `docker/build-push-action`),
-      # only AMD64 image is expected to be cached, ARM images will build from scratch.
-      - name: Retrieve image build from build cache
-        uses: actions/cache@v4
-        with:
-          path: /tmp/.buildx-cache
-          key: cache-buildx-${{ inputs.cache-key }}
-          restore-keys: |
-            cache-buildx-
 
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
@@ -65,19 +50,16 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Acquire the image version
-        id: get-version
-        shell: bash
-        run: echo "version=$(<VERSION)" >>"${GITHUB_OUTPUT}"
-
-      - name: Build and publish images
-        uses: docker/build-push-action@v6.17.0
+      - name: Build and push image
+        uses: docker/build-push-action@v6
         with:
           context: .
-          build-args: |
-            BUILD_VCS_REFERENCE=${{ github.sha }}
-            BUILD_VCS_VERSION=${{ steps.get-version.outputs.version }}
           platforms: linux/amd64,linux/arm64
+          build-args: |
+            VCS_VERSION=${{ github.ref_type == 'tag' && github.ref_name || 'edge' }}
+            VCS_REVISION=${{ github.sha }}
           push: true
-          tags: ${{ steps.prep.outputs.tags }}
-          cache-from: type=local,src=/tmp/.buildx-cache
+          provenance: true
+          tags: ${{ steps.prep-tags.outputs.tags }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
