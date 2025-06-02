@@ -2,7 +2,7 @@
   "Verbose": false,
   "Debug": false,
   "IgnoreDefaults": false,
-  "SpacesAftertabs": true,
+  "SpacesAfterTabs": false,
   "NoColor": false,
   "Exclude": [
     "^LICENSE$",
