@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
 
       - name: Lint code base
-        uses: super-linter/super-linter/slim@v8.2.0
+        uses: super-linter/super-linter/slim@v8.2.1
         env:
           LOG_LEVEL: NOTICE
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
