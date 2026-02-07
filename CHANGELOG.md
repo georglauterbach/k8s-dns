@@ -4,18 +4,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased](https://github.com/georglauterbach/k8s-dns/compare/v0.2.1...HEAD)
 
+## [0.6.0] - 2026-02-07
+
 ### Changed
 
-- checksum calculation in GH Actions
+- `LABELS` in `Dockerfile` were revised
 
 ### Updated
 
-- Alpine bumped from 3.16 to 3.17
-- added port 53 to list of container ports
+- Alpine bumped to 3.23
 
 ### Added
 
 - `configuration/named.conf` is now the default configuration inside the container
+- also exposed port 53 in `Dockerfile`
+
+### Removed
+
+- removed packages `bash` & `tz-data` from image
+- removed time zone setup from image
 
 ## [0.2.1] - 2022-11-24
 

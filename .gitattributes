@@ -27,5 +27,4 @@
 # -----------------------------------------------
 
 *.md     text    diff=markdown
-*.txt    text
-*.conf   text
+*.conf   text    diff=ini

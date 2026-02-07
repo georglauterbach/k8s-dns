@@ -4,7 +4,9 @@
 # -----------------------------------------------
 
 # Create gitignore files automatically for with
-# https://www.toptal.com/developers/gitignore 
+# https://www.toptal.com/developers/gitignore
+
+tmp/
 
 # -----------------------------------------------
 # ----  IDEs  -----------------------------------

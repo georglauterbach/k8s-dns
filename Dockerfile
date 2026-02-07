@@ -1,40 +1,31 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM docker.io/alpine:3.23
+FROM docker.io/alpine@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
 
-ARG IMAGE_NAME=k8s-dns
 ARG VCS_VERSION=edge
 ARG VSC_REVISION=unknown
-ARG BUILD_TIMEZONE=Europe/Berlin
+
 ENV USER=named
 ENV GROUP=named
 
-LABEL org.opencontainers.image.version="${VCS_VERSION}"
-LABEL org.opencontainers.image.revision="${VSC_REVISION}"
-LABEL org.opencontainers.image.title="${IMAGE_NAME}"
-LABEL org.opencontainers.image.vendor="Georg Lauterbach"
-LABEL org.opencontainers.image.authors="Georg Lauterbach"
-LABEL org.opencontainers.image.licenses="GPL-3.0"
-LABEL org.opencontainers.image.description="BIND9 DNS server running in a container"
-LABEL org.opencontainers.image.url="https://github.com/georglauterbach/k8s-dns"
-LABEL org.opencontainers.image.documentation="https://github.com/georglauterbach/k8s-dns/blob/main/README.md"
+# https://snyk.io/de/blog/how-and-when-to-use-docker-labels-oci-container-annotations/
+LABEL org.opencontainers.image.title="k8s-dns"
+LABEL org.opencontainers.image.description="BIND9 on Alpine"
 LABEL org.opencontainers.image.source="https://github.com/georglauterbach/k8s-dns"
+LABEL org.opencontainers.image.revision="${VSC_REVISION}"
+LABEL org.opencontainers.image.base.digest="25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659"
+LABEL org.opencontainers.image.base.name="docker.io/alpine"
+LABEL org.opencontainers.image.version="${VCS_VERSION}"
 
-SHELL ["/bin/ash", "-e", "-u", "-c"]
 WORKDIR /
 
-RUN <<EOM
-	apk add --no-cache bind bind-tools tzdata bash
-	mkdir -p /var/cache/named /etc/bind/
-	chown -R ${USER}:${GROUP} /var/cache/named
-	ln -fs "/usr/share/zoneinfo/${BUILD_TIMEZONE}" /etc/localtime
-EOM
+RUN apk add --no-cache bind bind-tools            \
+    && mkdir -p /etc/bind/       /var/cache/named \
+    && chown -R ${USER}:${GROUP} /var/cache/named
 
-COPY ./VERSION ./scripts/entrypoint.sh /
-COPY ./configuration/named.conf /etc/bind/named.conf
+COPY ./scripts/entrypoint.sh    /usr/local/bin/entrypoint.sh
 
 USER ${USER}
 EXPOSE 53/tcp 53/udp 8053/tcp 8053/udp
 
-ENTRYPOINT ["/bin/bash"]
-CMD ["/entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "/usr/local/bin/entrypoint.sh"]

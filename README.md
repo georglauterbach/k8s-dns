@@ -1,8 +1,6 @@
 # `k8s-dns`
 
-Easy yet powerful BIND9 DNS server for containers running on Alpine with Bash. Built with K8s-support in mind.
-
-This project aims to supply the user with a dead-simple container that is highly customizable. We believe that users can easily write BIND9 configuration files themselves - therefore, we do not provide environment variables that will be parsed into configuration files.
+BIND9 on Alpine; with K8s in mind. Bring your own `named.conf` and get up and running.
 
 ## Usage
 
@@ -22,11 +20,11 @@ All workflows are using the tagging convention listed below. It is subsequently 
 
 ### User-Supplied Configuration
 
-Your base configuration can be mounted to `${NAMED_MAIN_CONFIGURATION_FILE}` (see [environment variable section](#named_main_configuration_file)). The entrypoint script will execute the `named` service and provide the aforementioned file as the configuration file. As a consequence, you can configure everything yourself. A default configuration can be found under [`configuration/namd.conf`](configuration/named.conf) - this file is mounted to `${NAMED_MAIN_CONFIGURATION_FILE}` as a default.
+Your base configuration can be mounted to `${NAMED_MAIN_CONFIGURATION_FILE}` (see [environment variable section](#named_main_configuration_file)). The entrypoint script will execute the `named` service and provide the aforementioned file as the configuration file. As a consequence, you can configure everything yourself. A default configuration can be found under [`configuration/named.conf`](configuration/named.conf) - this file is mounted to `${NAMED_MAIN_CONFIGURATION_FILE}` as a default.
 
 ### Custom Script
 
-If you want to run a custom script before the DNS server is started, you can mount a script to `${USER_PATCHES_FILE}` (see [environment variable section](#user_patches_file)). This script will be `source`d before the DNS server is started, if it is present. If you provide a function called `user-patches-main`, the function is called. This way, you can even adjust environment variables configured in the entrypoint script. Have a look at the [entrypoint script](./scripts/entrypoint.sh) to see which variables are declared and what you can adjust.
+If you want to run a custom script before the DNS server is started, you can mount a script to `${USER_PATCHES_FILE}` (see [environment variable section](#user_patches_file)). This script will be sourced before the DNS server is started, if it is present. If you provide a function called `user_patches_-_main`, the function is called. This way, you can even adjust environment variables configured in the entrypoint script. Have a look at the [entrypoint script](./scripts/entrypoint.sh) to see which variables are declared and what you can adjust.
 
 ### Environment Variables
 
@@ -40,9 +38,9 @@ This sets the main configuration file that the `named` service is provided with 
 
 If you want to provide a custom script that is run right before the `named` service is started, you can change the location of this script with this variable. The default is `/user-patches.sh`.
 
-## Container Settings / Metrics
+## Container Settings
 
-The containers listens on port `8053` by default, for both UDP and TCP. You should be able to run this container with a read-only root filesystem. Therefore, you can run this container with a non-root user. If you need to change the time zone though, you will need to run as root.
+`named` listens on port `8053` by default, for both UDP and TCP. You can run this container with a read-only root filesystem and as a non-root user.
 
 | Metric       | Value                           |
 | :----------: | :-----------------------------: |
