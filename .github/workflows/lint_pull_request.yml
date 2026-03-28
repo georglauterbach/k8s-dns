@@ -10,6 +10,10 @@ defaults:
   run:
     shell: bash
 
+permissions:
+  contents: read
+  statuses: write
+
 jobs:
   lint_all:
     name: Lint against GitHub's Super-Linter
