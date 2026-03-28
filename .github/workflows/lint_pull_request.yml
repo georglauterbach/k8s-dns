@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   lint_all:
-    name: Lint against GitHub's Super-Linter
+    name: Lint against Super-Linter
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
@@ -34,6 +34,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SUPPRESS_POSSUM: true
           VALIDATE_ALL_CODEBASE: true
+
+          ENABLE_GITHUB_ACTIONS_STEP_SUMMARY: false
+          ENABLE_GITHUB_PULL_REQUEST_SUMMARY_COMMENT: false
+          SAVE_SUPER_LINTER_SUMMARY: false
 
           VALIDATE_BASH: true
           VALIDATE_BASH_EXEC: true

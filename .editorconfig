@@ -18,7 +18,7 @@ insert_final_newline = true
 [Dockerfile]
 indent_size          = 4
 
-[Makefile]
+[Justfile]
 indent_style         = tab
 
 [*.conf]
