@@ -15,7 +15,6 @@ on: # yamllint disable-line rule:truthy
 
 permissions:
   contents: read
-  packages: write
 
 jobs:
   build-image:
@@ -25,5 +24,13 @@ jobs:
   publish-images:
     name: Publish Image
     needs: [build-image]
+    permissions:
+      contents: read # Required to checkout the repository
+      packages: write # Required to push the container image
     uses: georglauterbach/k8s-dns/.github/workflows/generic_publish.yml@main
-    secrets: inherit
+    secrets:
+      GHCR_REPOSITORY: ${{ secrets.GHCR_REPOSITORY }}
+      DOCKER_REPOSITORY: ${{ secrets.DOCKER_REPOSITORY }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}

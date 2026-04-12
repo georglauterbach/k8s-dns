@@ -19,7 +19,9 @@ LABEL org.opencontainers.image.version="${VCS_VERSION}"
 
 WORKDIR /
 
-RUN apk add --no-cache bind bind-tools            \
+ARG BIND_VERSION=9.20.22-r0
+
+RUN apk add --no-cache "bind=${BIND_VERSION}" "bind-tools=${BIND_VERSION}" \
     && mkdir -p /etc/bind/       /var/cache/named \
     && chown -R ${USER}:${GROUP} /var/cache/named
 
