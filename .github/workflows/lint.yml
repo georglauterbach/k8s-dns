@@ -4,6 +4,8 @@ run-name: Lint
 
 on: # yamllint disable-line rule:truthy
   workflow_dispatch:
+  push:
+    branches: [ main ]
   pull_request:
     branches: [ '**' ]
 
