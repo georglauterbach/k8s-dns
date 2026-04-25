@@ -1,6 +1,6 @@
 # syntax=docker.io/docker/dockerfile:1
 
-FROM docker.io/alpine@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
+FROM docker.io/alpine@sha256:5b10f432ef3da1b8d4c7eb6c487f2f5a8f096bc91145e68878dd4a5019afde11
 
 ARG VCS_VERSION=edge
 ARG VSC_REVISION=unknown
@@ -13,7 +13,7 @@ LABEL org.opencontainers.image.title="k8s-dns"
 LABEL org.opencontainers.image.description="BIND9 on Alpine"
 LABEL org.opencontainers.image.source="https://github.com/georglauterbach/k8s-dns"
 LABEL org.opencontainers.image.revision="${VSC_REVISION}"
-LABEL org.opencontainers.image.base.digest="25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659"
+LABEL org.opencontainers.image.base.digest="5b10f432ef3da1b8d4c7eb6c487f2f5a8f096bc91145e68878dd4a5019afde11"
 LABEL org.opencontainers.image.base.name="docker.io/alpine"
 LABEL org.opencontainers.image.version="${VCS_VERSION}"
 
