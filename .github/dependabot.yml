@@ -7,7 +7,7 @@ updates:
     cooldown:
       default-days: 7
     schedule:
-      interval: weekly
+      interval: monthly
     labels:
       - area/ci
       - kind/update
@@ -18,7 +18,7 @@ updates:
     cooldown:
       default-days: 7
     schedule:
-      interval: weekly
+      interval: monthly
     labels:
       - area/ci
       - kind/update
