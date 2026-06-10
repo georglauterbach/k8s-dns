@@ -13,7 +13,7 @@ LABEL org.opencontainers.image.title="k8s-dns"
 LABEL org.opencontainers.image.description="BIND9 on Alpine"
 LABEL org.opencontainers.image.source="https://github.com/georglauterbach/k8s-dns"
 LABEL org.opencontainers.image.revision="${VSC_REVISION}"
-LABEL org.opencontainers.image.base.digest="5b10f432ef3da1b8d4c7eb6c487f2f5a8f096bc91145e68878dd4a5019afde11"
+LABEL org.opencontainers.image.base.digest="4f4ba248d8a2c90a6e52ffdfc194181f7617f9ddaca348d4c550a6b354fc7c2a"
 LABEL org.opencontainers.image.base.name="docker.io/alpine"
 LABEL org.opencontainers.image.version="${VCS_VERSION}"
 
