@@ -24,6 +24,5 @@ jobs:
     secrets:
       GHCR_REPOSITORY: ${{ secrets.GHCR_REPOSITORY }}
       DOCKER_REPOSITORY: ${{ secrets.DOCKER_REPOSITORY }}
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
