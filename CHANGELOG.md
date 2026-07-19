@@ -2,58 +2,53 @@
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased](https://github.com/georglauterbach/k8s-dns/compare/v0.2.1...HEAD)
+## [Unreleased](https://github.com/georglauterbach/k8s-dns/compare/v0.6.1...HEAD)
+
+> [!note]
+>
+> Changes in this section have not been released yet.
+
+## [0.6.1] - 2026-07-19
+
+- **Changed**
+  - bumped `bind` version from 9.20.22-r0 to 9.20.24-r0
+- **Fixed**
+  - resolved failing workflow due to missing declared secrets
 
 ## [0.6.0] - 2026-02-07
 
-### Changed
-
-- `LABELS` in `Dockerfile` were revised
-
-### Updated
-
-- Alpine bumped to 3.23
-
-### Added
-
-- `configuration/named.conf` is now the default configuration inside the container
-- also exposed port 53 in `Dockerfile`
-
-### Removed
-
-- removed packages `bash` & `tz-data` from image
-- removed time zone setup from image
+- **Changed**
+  - `LABELS` in `Dockerfile` were revised
+  - Alpine bumped to 3.23
+- **Added**
+  - `configuration/named.conf` is now the default configuration inside the container
+  - also exposed port 53 in `Dockerfile`
+- **Removed**
+  - removed packages `bash` & `tz-data` from image
+  - removed time zone setup from image
 
 ## [0.2.1] - 2022-11-24
 
-### Added
-
-- a new file called `VERSION` used for checking the version
-
-### Changed
-
-- build arguments use different syntax now
-- `org.opencontainers.image.version` & `org.opencontainers.image.revision` have new values
+- **Added**
+  - a new file called `VERSION` used for checking the version
+- **Changed**
+  - build arguments use different syntax now
+  - `org.opencontainers.image.version` & `org.opencontainers.image.revision` have new values
 
 ## [0.2.0] - 2022-11-16
 
-### Added
-
-- usage information
-- option to set config and user patches file with environment variables
-
-### Changed
-
-- adjusted ENV variable names in [#4](https://github.com/georglauterbach/k8s-dns/pull/4)
-- adjusted `Makefile`'s `run` target in [#4](https://github.com/georglauterbach/k8s-dns/pull/4)
-- changed to a Ubuntu base image in [#4](https://github.com/georglauterbach/k8s-dns/pull/4)
-- refactored `Dockerfile` in [#4](https://github.com/georglauterbach/k8s-dns/pull/4)
-- added a changelog [#4](https://github.com/georglauterbach/k8s-dns/pull/4)
-- improved entrypoint script (better user-integration)
-
-### Fixed
-
-- updated PR linting workflow to now actually run on PR
+- **Added**
+  - usage information
+  - option to set config and user patches file with environment variables
+- **Changed**
+  - adjusted ENV variable names in [#4](https://github.com/georglauterbach/k8s-dns/pull/4)
+  - adjusted `Makefile`'s `run` target in [#4](https://github.com/georglauterbach/k8s-dns/pull/4)
+  - changed to a Ubuntu base image in [#4](https://github.com/georglauterbach/k8s-dns/pull/4)
+  - refactored `Dockerfile` in [#4](https://github.com/georglauterbach/k8s-dns/pull/4)
+  - added a changelog [#4](https://github.com/georglauterbach/k8s-dns/pull/4)
+  - improved entrypoint script (better user-integration)
+- **Fixed**
+  - updated PR linting workflow to now actually run on PR
 
 ## [0.1.0] - 2022-07-05
 

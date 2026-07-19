@@ -19,13 +19,13 @@ LABEL org.opencontainers.image.version="${VCS_VERSION}"
 
 WORKDIR /
 
-ARG BIND_VERSION=9.20.22-r0
+ARG BIND_VERSION=9.20.24-r0
 
 RUN apk add --no-cache "bind=${BIND_VERSION}" "bind-tools=${BIND_VERSION}" \
     && mkdir -p /etc/bind/       /var/cache/named \
     && chown -R ${USER}:${GROUP} /var/cache/named
 
-COPY ./scripts/entrypoint.sh    /usr/local/bin/entrypoint.sh
+COPY ./scripts/entrypoint.sh /usr/local/bin/entrypoint.sh
 
 USER ${USER}
 EXPOSE 53/tcp 53/udp 8053/tcp 8053/udp

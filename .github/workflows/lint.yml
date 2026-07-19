@@ -32,4 +32,4 @@ jobs:
           persist-credentials: false
 
       - name: Run Linter
-        uses: georglauterbach/linter@v0.3.2
+        uses: georglauterbach/linter@v0.4.1
