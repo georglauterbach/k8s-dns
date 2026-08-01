@@ -17,6 +17,7 @@ LABEL org.opencontainers.image.version="${VCS_VERSION}"
 
 WORKDIR /
 
+# hadolint ignore=DL3018
 RUN apk add --no-cache bind bind-tools            \
     && mkdir -p /etc/bind/       /var/cache/named \
     && chown -R ${USER}:${GROUP} /var/cache/named
