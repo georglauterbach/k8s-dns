@@ -8,10 +8,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 >
 > Changes in this section have not been released yet.
 
-## [0.6.1] - 2026-07-19
+## [0.6.1] - 2026-08-01
 
 - **Changed**
-  - bumped `bind` version from 9.20.22-r0 to 9.20.24-r0
+  - `bind` and associated packages now have a floating tag again (so that future builds are still possible
+    with the selected Alpine version)
 - **Fixed**
   - resolved failing workflow due to missing declared secrets
 
