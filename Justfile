@@ -9,9 +9,9 @@ BUILD_VSC_REVISION := `git rev-parse HEAD`
 
 # Build the container image
 @build:
-	docker build --tag {{IMAGE_NAME}}:{{IMAGE_TAG}} --build-arg BUILD_VSC_REVISION={{BUILD_VSC_REVISION}} --build-arg BUILD_VCS_VERSION={{IMAGE_TAG}} .
+    docker build --tag {{IMAGE_NAME}}:{{IMAGE_TAG}} --build-arg BUILD_VSC_REVISION={{BUILD_VSC_REVISION}} --build-arg BUILD_VCS_VERSION={{IMAGE_TAG}} .
 
 # Run the container image
 [positional-arguments]
 @run *arguments: build
-	docker run --rm --tty --interactive -p 8053:8053/udp -p 8053:8053/tcp -v {{justfile_directory()}}/configuration/:/etc/bind/ {{IMAGE_NAME}}:{{IMAGE_TAG}} {{arguments}}
+    docker run --rm --tty --interactive -p 8053:8053/udp -p 8053:8053/tcp -v {{justfile_directory()}}/configuration/:/etc/bind/ {{IMAGE_NAME}}:{{IMAGE_TAG}} {{arguments}}
