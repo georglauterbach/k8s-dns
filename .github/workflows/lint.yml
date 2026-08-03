@@ -10,26 +10,22 @@ on: # yamllint disable-line rule:truthy
     branches: [ '**' ]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
-
-defaults:
-  run:
-    shell: bash
 
 permissions:
   contents: read
 
 jobs:
-  lint_all:
+  lint:
     name: Lint
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v7.0.1
         with:
           persist-credentials: false
 
       - name: Run Linter
-        uses: georglauterbach/linter@v0.4.2
+        uses: georglauterbach/linter@v0.4.4

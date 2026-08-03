@@ -1,0 +1,96 @@
+---
+version: '0.2'
+
+import: [ cspell.user.config.yaml ]
+
+ignorePaths: []
+
+dictionaryDefinitions: []
+dictionaries:
+  - en_US
+  - softwareTerms
+  - bash
+
+words:
+  - allowlist
+  - backpressure
+  - cooldown
+  - debuggee
+  - foldable
+  - foldables
+  - keepalive
+  - lockscreen
+  - recognised
+  - unrecognised
+  - unrequested
+  - unsanitized
+  - worktree
+  - worktrees
+
+ignoreWords:
+  - georg
+  - lauterbach
+  - georglauterbach
+
+  - clippy
+  - lldb
+  - rustc
+  - rustdoc
+  - rustup
+
+  - pyproject
+  - pytest
+  - ruff
+
+  - PKCS11
+
+  - acpi
+  - agentic
+  - awww
+  - bindsym
+  - btop
+  - buildx
+  - bwrap
+  - containerfile
+  - coolors
+  - gamemode
+  - everforest
+  - evergruv
+  - flyline
+  - gitui
+  - gsettings
+  - herdr
+  - justfile
+  - libbash
+  - libflyline
+  - lightctl
+  - patchelf
+  - pipewire
+  - powerprofilesctl
+  - ptyxis
+  - reflog
+  - rofi
+  - rtkit
+  - satty
+  - scdoc
+  - shellcheck
+  - shfmt
+  - shikane
+  - shikanectl
+  - swayfx
+  - swayidle
+  - swayimg
+  - swaylock
+  - swaymsg
+  - swaync
+  - swaynotificationcenter
+  - waybar
+  - wdisplays
+  - wireplumber
+  - wleave
+  - wlsunset
+  - wpctl
+  - xwayland
+  - yaru
+  - yazi
+  - zizmor

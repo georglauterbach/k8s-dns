@@ -1,5 +1,5 @@
 # -----------------------------------------------
-# ----  GitAttributes  --------------------------
+# ----  gitattributes  --------------------------
 # ----  https://git-scm.com/docs/gitattributes  -
 # -----------------------------------------------
 
@@ -10,21 +10,66 @@
 # ----  General  --------------------------------
 # -----------------------------------------------
 
-*        text=auto
+* text=auto eol=lf
 
-*.png   -text
-*.ico   -text
-
-# -----------------------------------------------
-# ----  Rust  -----------------------------------
-# -----------------------------------------------
-
-*.yml    text    diff=yaml
-*.yaml   text    diff=yaml
+.gitattributes !filter !diff export-ignore
+.gitignore     !filter !diff export-ignore
+.gitkeep       !filter !diff export-ignore
 
 # -----------------------------------------------
-# ----  Documents  ------------------------------
+# ----  IDEs  -----------------------------------
 # -----------------------------------------------
 
-*.md     text    diff=markdown
-*.conf   text    diff=ini
+.vscode/*.json linguist-language=JSON-with-Comments
+
+# -----------------------------------------------
+# ----  Languages  ------------------------------
+# -----------------------------------------------
+
+*.bash  text diff=bash
+*.c     text diff=cpp
+*.cc    text diff=cpp
+*.h     text diff=cpp
+*.hh    text diff=cpp
+*.md    text diff=markdown
+*.mdc   text diff=markdown
+*.py    text diff=python
+*.rs    text diff=rust
+*.sh    text diff=sh
+
+# -----------------------------------------------
+# ----  Other Formats  --------------------------
+# -----------------------------------------------
+
+*.lock  text
+*.json  text diff=json
+*.jsonc text diff=json
+*.toml  text diff=toml
+*.yml   text diff=yaml
+*.yaml  text diff=yaml
+
+# -----------------------------------------------
+# ----  Archives  -------------------------------
+# -----------------------------------------------
+
+*.7z    binary
+*.bz    binary
+*.bz2   binary
+*.gz    binary
+*.lz    binary
+*.tar   binary
+*.xz    binary
+*.zip   binary
+
+# -----------------------------------------------
+# ----  Graphics  -------------------------------
+# -----------------------------------------------
+
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.gif   binary
+*.tif   binary
+*.tiff  binary
+*.ico   binary
+*.svg   text

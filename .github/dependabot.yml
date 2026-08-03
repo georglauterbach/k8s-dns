@@ -8,18 +8,7 @@ updates:
       default-days: 7
     schedule:
       interval: monthly
+    assignees: [ georglauterbach ]
     labels:
-      - area/ci
-      - kind/update
-      - priority/low
-
-  - package-ecosystem: docker
-    directory: /
-    cooldown:
-      default-days: 7
-    schedule:
-      interval: monthly
-    labels:
-      - area/ci
-      - kind/update
-      - priority/medium
+      - kind::update
+      - area::ci

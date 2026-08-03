@@ -1,4 +1,4 @@
-# `k8s-dns`
+# k8s-dns
 
 BIND9 on Alpine; with K8s in mind. Bring your own `named.conf` and get up and running.
 

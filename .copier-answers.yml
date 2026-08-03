@@ -1,0 +1,15 @@
+_commit: 0.2.7
+_src_path: gh:georglauterbach/template.git
+dev_container_enabled: false
+git_ecosystem: github
+git_ecosystem_username: georglauterbach
+lang_python_enabled: false
+lang_rust_enabled: false
+lang_shell_enabled: true
+lang_shell_type: sh
+project_changelog_enabled: true
+project_copyright_holder: Georg Lauterbach
+project_description: BIND9 on Alpine; with K8s in mind. Bring your own `named.conf`
+    and get up and running.
+project_license: GPL-3.0-or-later
+project_name: k8s-dns

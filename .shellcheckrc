@@ -1,0 +1,10 @@
+shell=sh
+
+enable=all
+color=auto
+severity=style
+disable=SC2312
+external-sources=true
+check-sourced=true
+source-path=SCRIPTDIR
+wiki-link-count=5
