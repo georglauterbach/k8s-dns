@@ -35,7 +35,7 @@
 *.mdc   text diff=markdown
 *.py    text diff=python
 *.rs    text diff=rust
-*.sh    text diff=sh
+*.sh    text
 
 # -----------------------------------------------
 # ----  Other Formats  --------------------------

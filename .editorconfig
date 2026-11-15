@@ -15,7 +15,7 @@ tab_width                = 2
 trim_trailing_whitespace = true
 
 [*.sh]
-shell_variant            = sh
+shell_variant            = posix
 binary_next_line         = true
 switch_case_indent       = true
 space_redirects          = false
